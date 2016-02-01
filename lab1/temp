@@ -1,0 +1,191 @@
+#include <iostream>
+#include "list.h"
+int sizeNbr;
+
+
+List::List() {
+first=nullptr;
+sizeNbr=0;
+}
+
+List::~List() {
+    Node* temp;
+    while(List::first!=nullptr) {
+        temp = List::first;
+        List::first=temp->next;
+        temp->next=nullptr;
+        delete temp;
+    }
+    first=nullptr;
+//delete first;
+}
+
+bool List::exists(int d) const {
+    Node* temp=List::first;
+    do{
+        if(temp->value==d){
+            temp=nullptr;
+            return true;
+        }
+        temp=temp->next;
+    }while(temp!=nullptr);
+    temp=nullptr;
+	return false;
+}
+
+int List::size() const {
+	return sizeNbr;
+}
+
+bool List::empty() const {
+
+    if(List::first==nullptr){
+	    return true;
+    }
+    return false;
+}
+
+void List::insertFirst(int d) {
+++sizeNbr;
+Node* temp;
+temp= new Node(d,List::first);
+List::first = temp;
+temp=nullptr;
+
+}
+
+void List::remove(int d, DeleteFlag df) {
+    if(first==nullptr){
+        return;
+    }
+    Node* temp=List::first->next;
+    Node* prev=List::first;
+
+    if(List::DeleteFlag::LESS==df){
+        if(first->value<d){
+            first=first->next;
+            delete temp;
+            prev=nullptr;
+            return;           
+        }
+        do{
+            if(temp->value<d){
+                prev->next=temp->next;
+                delete temp;
+                prev=nullptr;
+                return;
+            }
+            prev= temp;
+            temp= temp->next; 
+       
+        }while(temp!=nullptr);    
+    } else if(List::DeleteFlag::EQUAL==df){
+         if(first->value==d){
+            first=first->next;
+            delete temp;
+            prev=nullptr;
+            return;           
+        }
+        do{
+            if(temp->value==d){
+                prev->next=temp->next;
+                delete temp;
+                prev=nullptr;
+                return;
+            }
+            prev= temp;
+            temp= temp->next; 
+       
+        }while(temp!=nullptr);    
+
+    } else if(List::DeleteFlag::GREATER==df){
+         if(first->value>d){
+            first=first->next;
+            delete temp;
+            prev=nullptr;
+            return;           
+        }
+        do{
+            if(temp->value>d){
+                prev->next=temp->next;
+                delete temp;
+                prev=nullptr;
+                return;
+            }
+            prev= temp;
+            temp= temp->next;      
+        }while(temp!=nullptr);    
+    }
+    temp=nullptr;
+    prev=nullptr;
+    return;
+}
+
+
+void List::remove(int d, DeleteFlag df) {
+    Node* temp=List::first->next;
+    Node* prev=List::first;
+    if(first==nullptr){
+        return;
+    }
+    if(List::DeleteFlag::LESS==df){
+        if(first->value<d){
+            first=first->next;
+            delete temp;
+            --sizeNbr;
+            return;           
+        }
+        do{
+            if(temp->value<d){
+                prev->next=temp->next;
+                --sizeNbr;
+                delete temp;
+                return;
+            }
+            prev= temp;
+            temp= temp->next; 
+       
+        }while(temp!=nullptr);    
+    } else if(List::DeleteFlag::EQUAL==df){
+         if(first->value==d){
+            first=first->next;
+            delete temp;
+            --sizeNbr;
+            return;           
+        }
+        do{
+            if(temp->value==d){
+                prev->next=temp->next;
+                --sizeNbr;
+                delete temp;
+                return;
+            }
+            prev= temp;
+            temp= temp->next; 
+       
+        }while(temp!=nullptr);    
+
+    } else if(List::DeleteFlag::GREATER==df){
+         if(first->value>d){
+            first=first->next;
+            delete temp;
+            --sizeNbr;
+            return;           
+        }
+        do{
+            if(temp->value>d){
+                prev->next=temp->next;
+                --sizeNbr;
+                delete temp;
+                return;
+            }
+            prev= temp;
+            temp= temp->next;      
+        }while(temp!=nullptr);    
+    }
+    return;
+}
+
+void List::print() const {
+}
+
