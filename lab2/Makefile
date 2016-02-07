@@ -20,14 +20,15 @@ LDFLAGS = -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS = readWords testDictionary wordtest
+PROGS = readWords testDictionary wordtest spell
 
 all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
 readWords: readWords.o
-testDictionary: testDictionary.o dictionary.o
+testDictionary: testDictionary.o dictionary.o word.o
 wordtest: wordtest.o word.o 
+spell: spell.o dictionary.o word.o
 
 # Phony targets
 .PHONY: all clean

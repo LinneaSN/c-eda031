@@ -11,6 +11,9 @@ public:
 	
 	/* Returns the word */
 	std::string get_word() const;
+
+    /* Returns the vector of trigrams */
+    std::vector<std::string> get_trigrams() const;
 	
 	/* Returns how many of the trigrams in t that are present
 	 in this word's trigram vector */

@@ -10,6 +10,11 @@ string Word::get_word() const {
 	return word;
 }
 
+
+vector<string> Word::get_trigrams() const {
+    return trigrams;
+}
+
 unsigned int Word::get_matches(const vector<string>& t) const {
 	int matches, latest;
     matches=latest=0;
