@@ -87,9 +87,9 @@ void Dictionary::rank_suggestions(vector<string>* suggestions, const string& wor
     d[0][0]=0;
     int ifvalue;
     for(auto &i : *suggestions) {
-        for(int index=1;index<static_cast<int>(word.size());++index) {
-            for(int j=1; j<static_cast<int>(i.size());++j){
-                if(word[j]==i[j]) {
+        for(int index=1;index<=static_cast<int>(word.size());++index) {
+            for(int j=1; j<=static_cast<int>(i.size());++j){
+                if(word[index-1]==i[j-1]) {
                     ifvalue = d[index-1][j-1];
                 } else {
                     ifvalue = d[index-1][j-1]+1;
