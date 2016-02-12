@@ -83,6 +83,6 @@ istream& operator>>(std::istream& in,Date& date){
     return in;
 }
 
-ostream& operator<<(std::ostream& out,Date& date){
+ostream& operator<<(std::ostream& out,const Date& date){
     return out<<setw(4)<<setfill('0')<<date.getYear()<<'-'<<setw(2)<<setfill('0')<<date.getMonth()<<'-'<<setw(2)<<setfill('0')<<date.getDay()<<endl;
 }

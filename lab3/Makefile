@@ -20,7 +20,7 @@ LDFLAGS = -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS = testHTML testPrimes date_test
+PROGS = testHTML testPrimes date_test testToString testString_cast
 
 all: $(PROGS)
 
@@ -28,6 +28,8 @@ all: $(PROGS)
 testHTML: TagRemover.o testHTML.o
 testPrimes: primes.o testPrimes.o
 date_test: date.o date_test.o
+testToString: testToString.o date.o
+testString_cast: testString_cast.o date.o
 
 # Phony targets
 .PHONY: all clean

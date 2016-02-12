@@ -12,7 +12,7 @@ public:
 	void next();               // advance to next day
     bool init(int y, int m, int d);
     friend std::istream& operator>>(std::istream& in,Date& date);
-    friend std::ostream& operator<<(std::ostream& out,Date& date);
+    friend std::ostream& operator<<(std::ostream& out,const Date& date);
 private:
 	int year;  // the year (four digits)
 	int month; // the month (1-12)
