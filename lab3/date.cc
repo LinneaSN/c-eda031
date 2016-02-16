@@ -16,6 +16,9 @@ Date::Date() {
 }
 
 Date::Date(int y, int m, int d) : year(y), month(m), day(d){
+    if(!(y=static_cast<int>(y))){
+	return;
+    }
     if(m>12) {
         month=12;
     } else if(m<1) {
@@ -29,6 +32,10 @@ Date::Date(int y, int m, int d) : year(y), month(m), day(d){
 }
 
 bool Date::init(int y, int m, int d){
+    if(!(y=static_cast<int>(y))){
+	return false;
+    }
+
     if(m>12) {
         month=12;
     } else if(m<1) {
@@ -74,6 +81,9 @@ void Date::next() {
 istream& operator>>(std::istream& in,Date& date){
     string temp;
     in>>temp;
+    if(in.eof()){
+        return in;
+    }
     int msep,dsep;
     msep = static_cast<int>(temp.find('-'));
     dsep = static_cast<int>(temp.rfind('-'));
