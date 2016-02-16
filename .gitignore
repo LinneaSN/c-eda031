@@ -4,6 +4,10 @@
 *.o
 *.obj
 
+#exclude compiled binaries
+*
+!*.*
+
 # Precompiled Headers
 *.gch
 *.pch
