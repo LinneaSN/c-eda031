@@ -33,24 +33,15 @@ Date::Date(int y, int m, int d) : year(y), month(m), day(d){
 
 bool Date::init(int y, int m, int d){
     if(!(y=static_cast<int>(y))){
-	return false;
+	    return false;
     }
 
-    if(m>12) {
-        month=12;
-    } else if(m<1) {
-        month=1;
-    } else {
-        month=m;
-    }
-    if(d<1){
+    if(m>12 or m<1) {
+        return false;
+    }    
+    if(d<1 or d>daysPerMonth[month-1]){
         day=1;
-    } else if(d>daysPerMonth[month-1]) {
-        day=daysPerMonth[month-1];
-    } else {
-        day=d;
     }
-    year=y;
     return true;
 }
 int Date::getYear() const {
@@ -67,12 +58,12 @@ int Date::getDay() const {
 
 void Date::next() {
   if(daysPerMonth[month-1]>=day+1){
-    day++;
+    ++day;
   } else if(month+1<=12){
-    month++;
+    ++month;
     day=1;
   } else {
-    year++;
+    ++year;
     month=1;
     day=1;
   }
@@ -80,14 +71,15 @@ void Date::next() {
 
 istream& operator>>(std::istream& in,Date& date){
     string temp;
-    in>>temp;
+    int y,m,d;
+    char c;
+    
     if(in.eof()){
         return in;
     }
-    int msep,dsep;
-    msep = static_cast<int>(temp.find('-'));
-    dsep = static_cast<int>(temp.rfind('-'));
-    if(!date.init(stoi(temp.substr(0,msep),nullptr),stoi(temp.substr(msep+1,dsep-msep-1),nullptr),stoi(temp.substr(dsep+1),nullptr))){
+    in>>y>>c>>m>>c>>d;
+
+    if(!(date.year=y) or !(date.month=m) or !(date.day=d) or !date.init(y,m,d) or c!='-'){
         in.setstate(ios_base::failbit);
     }   
     return in;

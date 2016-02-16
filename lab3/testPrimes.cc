@@ -1,6 +1,6 @@
 #include "primes.h"
 int main(){
-    int length=100000;
+    unsigned int length=100000;
     Primes prime(length);
     prime.findPrimes();
     prime.print(200);

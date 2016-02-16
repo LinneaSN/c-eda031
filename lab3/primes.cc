@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Primes::Primes(int ilength) : length(ilength) {
+Primes::Primes(unsigned int ilength) : length(ilength) {
     isPrimes.insert(isPrimes.size(),length,'P');
     isPrimes[0]=isPrimes[1]='C';
 
@@ -12,14 +12,17 @@ Primes::Primes(int ilength) : length(ilength) {
 
 
 void Primes::findPrimes(){
-    for(int i=2;i<length/2;++i){
-        if(isPrimes[i]=='P'){
-            for(int j=i+1;j<length;++j){
-                if(isPrimes[j]=='P' and j%i==0){
-                    isPrimes[j]='C';
-                }
+    unsigned int t=isPrimes.find('P');
+    unsigned int u;
+    while(t<length/2){
+        u=isPrimes.find('P',t+1);
+        while(u<length){
+            if(u%t==0){
+                isPrimes[u]='C';
             }
+            u=isPrimes.find('P',u+1);
         }
+        t=isPrimes.find('P',t+1);
     }
 }
 

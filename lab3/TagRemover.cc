@@ -7,84 +7,57 @@
 using namespace std;
 
 TagRemover::TagRemover(istream& input){
-    //table={{ "lt",'<'} , {"gt",'>'} , {"nbsp",' '} ,{"amp",'&'}};
-    //char ch;
-    //bool write = true;
-    //bool specialChar=false;
-    //string specialString;
-    input>> noskipws;
-    istream_iterator<char> it(input);
-    istream_iterator<char> endit;
-    HTML(it,endit);
-
-    cout<<HTML<<endl;
+    string temp;
+    while(getline(input,temp)){
+        HTML.append(temp);
+        HTML.append(1,'\n');
+    }
     
-    int first,last,newline;
+    string::size_type first,last,newline;
     first=HTML.find('<');
     last=HTML.find('>');
+    int nbrOfNewLines;
 
     while(first!=string::npos){
-    	newline=HTML.find("\n");
-    	if(newline<last and newline>first){
-	    HTML.replace(first,last-first+1,"\n");
-        } else {
-            HTML.erase(first,last-first+1);
+    	newline=HTML.find('\n',first);
+        nbrOfNewLines=0;
+    	while(newline<last and newline>first){
+            ++nbrOfNewLines;
+            newline=HTML.find('\n',newline+1);
         }
+        HTML.erase(first,last-first+1);
+        HTML.insert(first,nbrOfNewLines,'\n');
+
+
         first=HTML.find('<');
         last=HTML.find('>');
     }
-}
-    /*first = HTML.find("&lt;");
+
+    first = HTML.find("&lt;");
     while(first!=string::npos){
         HTML.replace(first,4,"<");
-	HTML.find("&lt;");   
+	    first=HTML.find("&lt;");   
     }
 
     first = HTML.find("&gt;");
     while(first!=string::npos){
         HTML.replace(first,4,">");
-	HTML.find("&gt;");   
+	    first=HTML.find("&gt;");   
     }
 
     first = HTML.find("&nbsp;");
     while(first!=string::npos){
         HTML.replace(first,6," ");
-	HTML.find("&nbsp;");   
+	    first=HTML.find("&nbsp;");   
     }
 
     first = HTML.find("&amp;");
     while(first!=string::npos){
         HTML.replace(first,5,"&");
-	HTML.find("&amp;");   
-    }*/
+	    first= HTML.find("&amp;");   
+    }
 
-
-    
-
-
-
-   /* while(input.get(ch)){
-        if(ch=='<'){
-            write = false;
-        } else if(ch=='>'){
-            write = true;
-        } else if(ch=='&'){
-            write =false;
-            specialChar=true;
-        }else if(specialChar){
-            if(ch==';'){
-                specialChar=false;
-                write=true;
-                HTML.push_back(table[specialString]);
-                specialString.erase();
-            } else {
-                specialString.push_back(ch);
-            }            
-        } else if(ch=='\n' or write) {
-            HTML.push_back(ch);
-        }
-    }*/
-
+}
 
 void TagRemover::print(ostream& output){
     output<<HTML<<endl;
