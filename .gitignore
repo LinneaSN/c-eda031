@@ -7,6 +7,10 @@
 #exclude compiled binaries
 *
 !*.*
+!*/
+
+#include makefile
+!Makefile
 
 # Precompiled Headers
 *.gch
