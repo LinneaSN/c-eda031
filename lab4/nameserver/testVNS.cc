@@ -2,7 +2,7 @@
  * nstest.cc: a program to test the name server implementations.
  */
 #include "nameserverinterface.h"
-#include "VNS.h"
+#include "vns.h"
 #include <iostream>
 #include <cassert>
 

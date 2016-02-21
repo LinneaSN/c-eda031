@@ -20,14 +20,16 @@ LDFLAGS = -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS = testVNS nstest nstime
+PROGS = simplebitsettest bitsettest1 bitsettest2
 
 all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
-testVNS: testVNS.o VNS.o
-nstest: nstest.o VNS.o mns.o umns.o hns.o
-nstime: nstime.o VNS.o mns.o umns.o hns.o
+simplebitsettest: simplebitsettest.o simplebitset.o
+bitsettest1: bitsettest1.o bitset.o bitreference.o 
+bitsettest2: bitsettest2.o bitset.o bitreference.o 
+
+
 
 # Phony targets
 .PHONY: all clean
