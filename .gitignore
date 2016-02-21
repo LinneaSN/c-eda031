@@ -1,13 +1,13 @@
+#exclude compiled binaries
+*
+!*.*
+!*/
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
-
-#exclude compiled binaries
-*
-!*.*
-!*/
 
 #include makefile
 !Makefile
